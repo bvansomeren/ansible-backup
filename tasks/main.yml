@@ -1,0 +1,11 @@
+---
+# tasks file for bvansomeren.backup
+
+- name: ensure rsync
+  package: name=rsync state=present
+
+- name: ensure backup user is created
+  user: name="{{ backup_username }}" state=present
+
+- name: ensure public key auth is setup for backup user
+  authorized_key: user="{{ backup_username }}" state=present key="{{ backup_pubkey }}"
